@@ -2,13 +2,11 @@ package com.example.bookfinder;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,46 +24,79 @@ import java.util.List;
 public class CodeScanActivity extends AppCompatActivity {
     private DecoratedBarcodeView barcodeView;
     private TextView txtISBN;
+    private TextView lblIsbn;
     private static final int CAMERA_PER_CODE_REQUEST=100;
-    private BarcodeCallback callback = new BarcodeCallback() {
-        @Override
-        public void barcodeResult(BarcodeResult result) {
-            if(result.getText() == null ) {
-                return;
-            }
-
-            barcodeView.setStatusText(result.getText());
-            txtISBN.setText(result.getText());
-        }
-
-        @Override
-        public void possibleResultPoints(List<ResultPoint> resultPoints) {
-        }
-    };
+    private String codeValue;//The value of the ISBN to be used to fetch book infos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_scan);
-        txtISBN = (TextView) findViewById(R.id.txt_code);
+        codeValue="";
+        fetchViews();
+        askForCameraPermission();
+        initBarcodeView();
+    }
+
+    private void initBarcodeView() {
+        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);
+        this.barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
+        this.barcodeView.initializeFromIntent(getIntent());
+        this.barcodeView.decodeContinuous(getBarcodeCallBack());
+    }
+
+    private void fetchViews() {
+        this.lblIsbn = findViewById(R.id.lbl_isbn);
+        this.lblIsbn.setVisibility(View.INVISIBLE);
+        this.txtISBN = findViewById(R.id.txt_code);
+        this.txtISBN.setVisibility(View.INVISIBLE);
+        this.barcodeView =findViewById(R.id.barcode_view);
+    }
+
+    private void askForCameraPermission() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED)
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PER_CODE_REQUEST);
-        barcodeView =findViewById(R.id.barcode_view);
-        Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);
-        barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
-        barcodeView.initializeFromIntent(getIntent());
-        barcodeView.decodeContinuous(callback);
-        barcodeView.resume();
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.barcodeView.pause();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.barcodeView.resume();
+    }
 
+    private BarcodeCallback getBarcodeCallBack(){
+        return new BarcodeCallback() {
+            @Override
+            public void barcodeResult(BarcodeResult result) {
+                if(result.getText() == null || result.getText().equals(codeValue) ) {
+                    return;
+                }
+                barcodeView.setStatusText(getString(R.string.msg_got_isbn));
+                txtISBN.setText(result.getText());
+                txtISBN.setVisibility(View.VISIBLE);
+                codeValue = result.getText();
+                lblIsbn.setVisibility(View.VISIBLE);
+            }
 
-
+            @Override
+            public void possibleResultPoints(List<ResultPoint> resultPoints) {
+            }
+        };
+    }
 
     public void find(View view){
-        //TODO find the book using google books api and show result activity
-        Toast.makeText(this,"Scan book code first !",Toast.LENGTH_LONG).show();
+        if(codeValue.isEmpty()){
+            Toast.makeText(this,getString(R.string.msg_scan_first),Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this,"We found the ISBN "+codeValue+". But book lookup is not implemented yet !",Toast.LENGTH_LONG).show();
+        }
+
     }
 }
