@@ -3,4 +3,11 @@
     <string name="msg_welcome">Hello, and welcome to the Book Finer App.</string>
     <string name="msg_instruction">Click on start, Scan the BarCode and get The book infos !</string>
     <string name="btn_start">Start !</string>
+    <string name="msg_scan_ind">Scan ISBN Code !</string>
+    <string name="msg_scan_ind2">(Bar code can be found in the back cover of the book)</string>
+    <string name="btn_find">Find  !</string>
+    <string name="hint_isbn">ISBN CODE</string>
+    <string name="msg_got_isbn">We got ISBN.Now click find !</string>
+    <string name="msg_scan_first">Scan book code first !</string>
+    <string name="lbl_isbn_code">ISBN is :</string>
 </resources>

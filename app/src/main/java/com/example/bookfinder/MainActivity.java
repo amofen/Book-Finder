@@ -1,5 +1,10 @@
 package com.example.bookfinder;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void start(View view){
-        //TODO start the scan activity
-        Toast.makeText(this,"Scan  is supposed to start now !",Toast.LENGTH_SHORT).show();
+    public void start(View view) {
+        Toast.makeText(this, "Scan  is supposed to start now !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, CodeScanActivity.class);
+        startActivity(intent);
     }
 }
