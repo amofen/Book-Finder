@@ -1,6 +1,7 @@
 package com.example.bookfinder;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +11,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bookfinder.data.Book;
+import com.example.bookfinder.data.BookInfoRetrieveAsyncTask;
+import com.example.bookfinder.data.DataRetrievedListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -21,7 +25,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class CodeScanActivity extends AppCompatActivity {
+public class CodeScanActivity extends AppCompatActivity implements DataRetrievedListener {
     private DecoratedBarcodeView barcodeView;
     private TextView txtISBN;
     private TextView lblIsbn;
@@ -96,7 +100,19 @@ public class CodeScanActivity extends AppCompatActivity {
             Toast.makeText(this,getString(R.string.msg_scan_first),Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this,"We found the ISBN "+codeValue+". But book lookup is not implemented yet !",Toast.LENGTH_LONG).show();
+            BookInfoRetrieveAsyncTask task = new BookInfoRetrieveAsyncTask(this);
+            task.execute("4567890");
+
         }
 
+
+    }
+
+    @Override
+    public void onCompletedTask(Book book) {
+        Toast.makeText(this,book.getTitle()+" book Has been found",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,BookDetailsActivity.class);
+        intent.putExtra("book",book);
+        startActivity(intent);
     }
 }

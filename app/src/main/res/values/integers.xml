@@ -1,0 +1,4 @@
+<resources>
+    <item name="book_lbl_weight" type="integer" format="float">1.5</item>
+    <item name="book_inf_weight" type="integer" format="float">2.5</item>
+</resources>

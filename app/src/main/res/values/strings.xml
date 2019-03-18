@@ -9,5 +9,12 @@
     <string name="hint_isbn">ISBN CODE</string>
     <string name="msg_got_isbn">We got ISBN.Now click find !</string>
     <string name="msg_scan_first">Scan book code first !</string>
-    <string name="lbl_isbn_code">ISBN is :</string>
+    <string name="lbl_isbn_code">ISBN :</string>
+    <string name="lbl_book_id">Book Id :</string>
+    <string name="lbl_book_author">Author :</string>
+    <string name="lbl_publisher">Publisher :</string>
+    <string name="lbl_publication_date">Published on :</string>
+    <string name="lbl_book_category">Category :</string>
+    <string name="lbl_book_page_count">Page count :</string>
+    <string name="lbl_book_link">Preview link :</string>
 </resources>
