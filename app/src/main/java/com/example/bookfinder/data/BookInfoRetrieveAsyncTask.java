@@ -30,7 +30,7 @@ public class BookInfoRetrieveAsyncTask extends AsyncTask<String,Integer,Book> {
         book.setPublishedDate("2019-03-17");
         book.setPublisher("APress");
         book.setTitle("The Android Book");
-        book.setThumbnail("http://books.google.com/android-book/thumbnail.jpeg");
+        book.setThumbnail("https://books.google.com/books/content?id=fFtNPgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api");
         try{
             Thread.sleep(2000);
         }catch (Exception ex){

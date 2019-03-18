@@ -8,6 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
     private DecoratedBarcodeView barcodeView;
     private TextView txtISBN;
     private TextView lblIsbn;
+    private ProgressBar progressBar;
+    private Button btnFind;
     private static final int CAMERA_PER_CODE_REQUEST=100;
     private String codeValue;//The value of the ISBN to be used to fetch book infos
     @Override
@@ -54,6 +58,9 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
         this.txtISBN = findViewById(R.id.txt_code);
         this.txtISBN.setVisibility(View.INVISIBLE);
         this.barcodeView =findViewById(R.id.barcode_view);
+        this.progressBar = findViewById(R.id.scanProgressBar);
+        this.progressBar.setVisibility(View.GONE);
+        this.btnFind = findViewById(R.id.btn_find);
     }
 
     private void askForCameraPermission() {
@@ -99,7 +106,8 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
         if(codeValue.isEmpty()){
             Toast.makeText(this,getString(R.string.msg_scan_first),Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(this,"We found the ISBN "+codeValue+". But book lookup is not implemented yet !",Toast.LENGTH_LONG).show();
+            this.progressBar.setVisibility(View.VISIBLE);
+            this.btnFind.setVisibility(View.INVISIBLE);
             BookInfoRetrieveAsyncTask task = new BookInfoRetrieveAsyncTask(this);
             task.execute("4567890");
 
@@ -110,7 +118,6 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
 
     @Override
     public void onCompletedTask(Book book) {
-        Toast.makeText(this,book.getTitle()+" book Has been found",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,BookDetailsActivity.class);
         intent.putExtra("book",book);
         startActivity(intent);
