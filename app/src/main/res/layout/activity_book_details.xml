@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookDetailsActivity">
+
+    <ImageView
+        android:id="@+id/inf_img"
+        android:layout_width="153dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:stretchColumns="1"
+        app:layout_constraintTop_toBottomOf="@+id/inf_img">
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_id"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_id" />
+
+            <TextView
+                android:id="@+id/inf_id"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_id"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_author"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_author" />
+
+            <TextView
+                android:id="@+id/inf_author"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_author"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_publisher"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_publisher" />
+
+            <TextView
+                android:id="@+id/inf_publisher"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_publisher"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_pub_date"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_publication_date" />
+
+            <TextView
+                android:id="@+id/inf_pub_date"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_publication_date"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_isbn"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_isbn_code" />
+
+            <TextView
+                android:id="@+id/inf_isbn"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_isbn_code"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_category"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_category" />
+
+            <TextView
+                android:id="@+id/inf_category"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_category"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_page_count"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_page_count" />
+
+            <TextView
+                android:id="@+id/inf_page_count"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_page_count"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:weightSum="4">
+
+            <TextView
+                android:id="@+id/lbl_link"
+                android:layout_width="0dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/book_lbl_left_margin"
+                android:layout_weight="@integer/book_lbl_weight"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_link" />
+
+            <TextView
+                android:id="@+id/inf_link"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/book_inf_left_margin"
+                android:layout_weight="@integer/book_inf_weight"
+                android:gravity="left"
+                android:padding="@dimen/book_tbl_padding"
+                android:text="@string/lbl_book_link"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/inf_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginRight="178dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
