@@ -4,6 +4,15 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
 public class BookInfoRetrieveAsyncTask extends AsyncTask<String,Integer,Book> {
     private DataRetrievedListener listener;
 
@@ -16,21 +25,30 @@ public class BookInfoRetrieveAsyncTask extends AsyncTask<String,Integer,Book> {
         String bareCode = strings[0];
 
         if(bareCode.isEmpty()){
-
             return null;
         }
-        Book book = new Book();
-        //TODO call the WS and fetch the book information
-        book.setAuthor("Amine Aouffen");
-        book.setCategory("Science");
-        book.setId("xHgheTuz73");
-        book.setIsbn("098323872563672");
-        book.setPagesCount(522);
-        book.setPreviewLink("http://books.google.com/android-book");
-        book.setPublishedDate("2019-03-17");
-        book.setPublisher("APress");
-        book.setTitle("The Android Book");
-        book.setThumbnail("https://books.google.com/books/content?id=fFtNPgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api");
+        HttpURLConnection httpConnection;
+        try {
+            httpConnection = (HttpURLConnection) new URL("https://www.googleapis.com/books/v1/volumes?q=isbn:"+bareCode).openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+            String read;
+            while ((read=br.readLine()) != null) {
+                sb.append(read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        String jsonBook = sb.toString();
+        Log.d("BOOK",jsonBook);
+        Book book = BookParser.parseFromJson(jsonBook);
+        book.setIsbn(bareCode);
         try{
             Thread.sleep(2000);
         }catch (Exception ex){
