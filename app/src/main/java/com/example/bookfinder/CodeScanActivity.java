@@ -109,7 +109,7 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
             this.progressBar.setVisibility(View.VISIBLE);
             this.btnFind.setVisibility(View.INVISIBLE);
             BookInfoRetrieveAsyncTask task = new BookInfoRetrieveAsyncTask(this);
-            task.execute("4567890");
+            task.execute(codeValue);
 
         }
 
@@ -118,8 +118,19 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
 
     @Override
     public void onCompletedTask(Book book) {
-        Intent intent = new Intent(this,BookDetailsActivity.class);
-        intent.putExtra("book",book);
-        startActivity(intent);
+        if(book!=null){
+            Intent intent = new Intent(this,BookDetailsActivity.class);
+            intent.putExtra("book",book);
+            this.btnFind.setVisibility(View.VISIBLE);
+            this.progressBar.setVisibility(View.GONE);
+            this.codeValue="";
+            barcodeView.setStatusText("");
+            txtISBN.setText("");
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this,"No Book Found !!!",Toast.LENGTH_SHORT);
+        }
+
     }
 }

@@ -97,4 +97,20 @@ public class Book implements Serializable {
     public void setPagesCount(int pagesCount) {
         this.pagesCount = pagesCount;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publishedDate='" + publishedDate + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", category='" + category + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", previewLink='" + previewLink + '\'' +
+                ", pagesCount=" + pagesCount +
+                '}';
+    }
 }
