@@ -95,7 +95,6 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
                 codeValue = result.getText();
                 lblIsbn.setVisibility(View.VISIBLE);
             }
-
             @Override
             public void possibleResultPoints(List<ResultPoint> resultPoints) {
             }
@@ -110,7 +109,6 @@ public class CodeScanActivity extends AppCompatActivity implements DataRetrieved
             this.btnFind.setVisibility(View.INVISIBLE);
             BookInfoRetrieveAsyncTask task = new BookInfoRetrieveAsyncTask(this);
             task.execute(codeValue);
-
         }
 
 

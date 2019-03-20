@@ -36,7 +36,7 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
         fetchViews();
-        Book book = (Book)getIntent().getSerializableExtra("book");
+        Book book = (Book) getIntent().getSerializableExtra("book");
         initViews(book);
 
     }
@@ -48,7 +48,7 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
         txtTitle = findViewById(R.id.inf_title);
         txtTitle = findViewById(R.id.inf_title);
         txtBookId = findViewById(R.id.inf_id);
-        txtAuthor  = findViewById(R.id.inf_author);
+        txtAuthor = findViewById(R.id.inf_author);
         txtPublisher = findViewById(R.id.inf_publisher);
         txtPublishedDate = findViewById(R.id.inf_pub_date);
         txtIsbn = findViewById(R.id.inf_isbn);
@@ -57,7 +57,7 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
         txtLink = findViewById(R.id.inf_link);
     }
 
-    private void initViews(Book book){
+    private void initViews(Book book) {
         txtTitle.setText(book.getTitle());
         txtBookId.setText(book.getId());
         txtAuthor.setText(book.getAuthor());
@@ -67,12 +67,12 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
         txtCategory.setText(book.getCategory());
         txtPageCount.setText(Integer.toString(book.getPagesCount()));
         txtLink.setText(book.getPreviewLink());
-        FetchThumbnailTask task  = new FetchThumbnailTask(this);
+        FetchThumbnailTask task = new FetchThumbnailTask(this);
         task.execute(book.getThumbnail());
     }
 
     @Override
-    public void onThumbnailRetrieved(Bitmap bitmap){
+    public void onThumbnailRetrieved(Bitmap bitmap) {
         this.imgThumbnail.setImageBitmap(bitmap);
         this.imgThumbnail.setVisibility(View.VISIBLE);
         this.progressBar.setVisibility(View.GONE);
@@ -80,7 +80,7 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
     }
 
 
-    class FetchThumbnailTask extends AsyncTask<String,Void,Bitmap>{
+    class FetchThumbnailTask extends AsyncTask<String, Void, Bitmap> {
 
         private ThumbnailRetrievedListener listener;
 
@@ -90,15 +90,14 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
 
         @Override
         protected Bitmap doInBackground(String... strings) {
-            try
-            {
+            try {
                 Bitmap b;
                 URL url = new URL(strings[0]);
                 InputStream is = new BufferedInputStream(url.openStream());
                 b = BitmapFactory.decodeStream(is);
-                Thread.sleep(2000);
+                Thread.sleep(1000); //Only to be able to show progress bar :)
                 return b;
-            } catch(Exception e){
+            } catch (Exception e) {
                 Log.d("exception", e.getMessage());
             }
             return null;
@@ -108,10 +107,8 @@ public class BookDetailsActivity extends AppCompatActivity implements ThumbnailR
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             listener.onThumbnailRetrieved(bitmap);
-
-
         }
     }
 
 
-    }
+}
